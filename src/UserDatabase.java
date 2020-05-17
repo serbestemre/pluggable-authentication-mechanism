@@ -1,8 +1,5 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-
 public class UserDatabase {
-    static ArrayList<User> users = new ArrayList<>();
+    static AbstractAggregate users = new Collection();
 
     public void addUserToDatabase(User newUser) {
         // TODO username should be unique and a user can only be defined with a single auth access permission
@@ -11,34 +8,37 @@ public class UserDatabase {
 
     public void printDb() {
         System.out.println("Registered user list is printing...");
-        Iterator iterator = users.iterator();
-        while (iterator.hasNext()) {
-            User currentUser = (User) iterator.next();
+        AbstractIterator iterator = users.CreateIterator();
+        while (!iterator.IsDone()) {
+            User currentUser = iterator.CurrentUser();
             System.out.println(currentUser.getUserName());
+            iterator.Next();
         }
     }
 
     public int getUid(String username) {
-        Iterator iterator = users.iterator();
+        AbstractIterator iterator = users.CreateIterator();
         int uid = -1;
-        while (iterator.hasNext()) {
-            User currentUser = (User) iterator.next();
+        while (!iterator.IsDone()) {
+            User currentUser = iterator.CurrentUser();
             if (currentUser.getUserName().toLowerCase().equals(username.toLowerCase())) {
                 uid = currentUser.getUid();
             }
+            iterator.Next();
         }
         return uid;
     }
 
 
     public User findUser(String username) {
-        Iterator iterator = users.iterator();
+        AbstractIterator iterator = users.CreateIterator();
         User foundUser = null;
-        while (iterator.hasNext()) {
-            User currentUser = (User) iterator.next();
+        while (!iterator.IsDone()) {
+            User currentUser = (User) iterator.CurrentUser();
             if (currentUser.getUserName().toLowerCase().equals(username.toLowerCase())) {
                 foundUser = currentUser;
             }
+            iterator.Next();
         }
         return foundUser;
     }
