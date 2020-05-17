@@ -32,5 +32,8 @@ public class Main {
         windowsOS.authenticate("Hatice","abc");
         System.out.println(" ");
         windowsOS.authenticate("İrem","123abc");
+
+
+
     }
 }

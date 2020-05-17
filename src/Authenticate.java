@@ -23,7 +23,7 @@ abstract class Authenticate {
         User registeredUser =  findUser(name);
         boolean isPasswordMatch = verifyPassword(registeredUser.getPassword(), password);
         if(!isPasswordMatch){
-            System.out.println("Şifre uyuşmuyor");
+            System.out.println("Passwords does not match");
 
         }else{
             rc = isLoggedIn();

@@ -2,9 +2,9 @@
 public class OperatingSystem {
     UserDatabase db = new UserDatabase();
     public void authenticate(String username, String pwd){
-        Authenticate localAuth = Local.getLocalAuthInstance();
-        Authenticate ldapAuth = Ldap.getLdapAuthInstance();
-        Authenticate kerberosAuth = Kerberos.getKerberosAuthInstance();
+        Adapter adapter;
+
+
 
         int uid = db.getUid(username);
         String uidString = String.valueOf(uid);
@@ -29,13 +29,16 @@ public class OperatingSystem {
 
         switch (accessRoleCode){
             case "local":
-                rc = localAuth.authenticateByGivenAccess(username,pwd);
+                adapter = new LocalAdapter();
+                rc = adapter.authenticate(username,pwd);
                 break;
             case "ldap":
-               rc = ldapAuth.authenticateByGivenAccess(username,pwd);
+                adapter = new LdapAdapter();
+               rc = adapter.authenticate(username,pwd);
                 break;
             case "kerberos":
-                rc = kerberosAuth.authenticateByGivenAccess(username,pwd);
+                adapter = new KerberosAdapter();
+                rc = adapter.authenticate(username,pwd);
                 break;
             default:
                 rc = 1;
@@ -47,7 +50,7 @@ public class OperatingSystem {
             uid = db.getUid(username);
             // TODO setUid ???
         }else{
-            System.out.println("HATALI GİRİŞ DENEMESİ");
+            System.out.println("Authentication is failed!");
         }
 
     };
