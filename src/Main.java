@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 //Facade
 class OperatingSystem {
     UserDatabase db = new UserDatabase();
@@ -60,38 +62,44 @@ class OperatingSystem {
 public class Main {
 
     public static void main(String[] args) {
+        // For login in local, the id of the user must start with 100
         User user1 = new User("Emre", "123");
         user1.setUid(100100);
+
+        // For login in ldap, the id of the user must start with 200
         User user2 = new User("Sercan", "123");
         user2.setUid(200100);
+
+        // For login in kerberos, the id of the user must start with 300
         User user3 = new User("Hatice", "abc");
         user3.setUid(300100);
+
         User user4 = new User("İrem", "123abc");
         user4.setUid(300101);
 
         UserDatabase db = new UserDatabase();
+
+        // Added created users to the database
         db.addUserToDatabase(user1);
         db.addUserToDatabase(user2);
         db.addUserToDatabase(user3);
         db.addUserToDatabase(user4);
 
-        db.printDb();
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.println(" ");
-        System.out.println("---------------");
-        System.out.println(" ");
+        System.out.println("Provide username and password to login to the Operating System");
+        System.out.println("--------------------");
+
+        System.out.println("Username:");
+        String username = scanner.nextLine();
+        System.out.println("Password:");
+        String password = scanner.nextLine();
+        System.out.println("--------------------");
 
         OperatingSystem windowsOS = new OperatingSystem();
 
-        // TODO get inputs from scanner
-        windowsOS.authenticate("Emre", "123");
+        windowsOS.authenticate(username, password);
         System.out.println(" ");
-        windowsOS.authenticate("Sercan", "123");
-        System.out.println(" ");
-        windowsOS.authenticate("Hatice", "abc");
-        System.out.println(" ");
-        windowsOS.authenticate("İrem", "123abc");
-
 
     }
 }

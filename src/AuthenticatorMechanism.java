@@ -10,7 +10,7 @@ abstract class AuthenticatorMechanism {
 
     public final boolean verifyPassword(String userPass, String enteredPass) {
         System.out.println("Verifying user information....");
-        return enteredPass == userPass;
+        return enteredPass.equals(userPass);
     }
 
     abstract int isLoggedIn();
