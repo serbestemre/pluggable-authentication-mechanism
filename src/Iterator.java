@@ -1,4 +1,17 @@
 import java.util.ArrayList;
+//Iterator pattern is used to access the elements of a collection.
+// In our case, we have a general collection which contains users defined in OS.
+// In order to find a user from the collection, users are iterated one by one in findUser() and getUid() methods.
+//
+// PARTICIPANTS
+// Iterator:
+//  AbstractIterator
+// Concrete Iterator:
+//  Iterator
+// Aggregate:
+//  AbstractCollection
+// Concrete  Aggregate:
+//  Collection
 
 
 
