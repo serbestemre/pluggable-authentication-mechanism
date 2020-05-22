@@ -1,4 +1,9 @@
-// Template
+// This is the Template Pattern we used in the project.
+// Abstract class lets us to perform different methods in an order.
+// Non-changed methods implemented as final but if the method is changing
+// according to the inherited class so, we override it in the sub class and give the appropriate solution.
+// In this case, as the user authenticate with different types (Local, LDAP and Kerberos)
+// we only printed what type the user connected to the Operating System
 
 abstract class AuthenticatorMechanism {
     UserDatabase dbInstance = new UserDatabase();
@@ -28,14 +33,13 @@ abstract class AuthenticatorMechanism {
             boolean isPasswordMatch = verifyPassword(registeredUser.getPassword(), password);
             try {
                 if (!isPasswordMatch) {
-                    throw new Exception();
-
+                    throw new Exception("Username or password is not correct!");
                 } else {
                     rc = isLoggedIn();
                 }
                 return rc;
             } catch (Exception e) {
-                System.out.println("Passwords did not match!");
+                System.out.println(e.getMessage());
                 return rc;
             }
 

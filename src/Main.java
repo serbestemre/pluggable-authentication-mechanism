@@ -49,11 +49,15 @@ class OperatingSystem {
                 break;
         }
 
-        if (rc == 0) {
-            System.out.println("User logged in successfully!");
-        } else {
-            System.out.println("Authentication is failed!");
-        }
+       try{
+           if (rc == 0) {
+               System.out.println("User logged in successfully!");
+           } else {
+               throw new Exception("Authentication is failed");
+           }
+       }catch (Exception e){
+           System.out.println(e.getMessage());
+       }
 
     }
 

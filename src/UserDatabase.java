@@ -5,13 +5,17 @@ public class UserDatabase {
 
     public void addUserToDatabase(User newUser) {
         try {
+            String userId = String.valueOf(newUser.getUid());
+            if (userId.isEmpty()) {
+                throw new Exception("UID must set before register to the operating system");
+            }
             if (!users.contains(newUser)) {
                 users.add(newUser);
             } else {
-                throw new Exception();
+                throw new Exception("User already exists in the database");
             }
         } catch (Exception e) {
-            System.out.println("User already exists in the database");
+            System.out.println(e.getMessage());
         }
 
     }
@@ -84,7 +88,8 @@ class User {
     }
 
     public void setUid(int uid) {
-        this.uid = uid;
+
+                this.uid = uid;
     }
 
     public String getPassword() {
