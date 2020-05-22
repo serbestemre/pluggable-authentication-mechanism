@@ -4,8 +4,14 @@ abstract class AuthenticatorMechanism {
     UserDatabase dbInstance = new UserDatabase();
 
     public final User findUser(String userName) {
-        System.out.println("Looking for user information...");
-        return dbInstance.findUser(userName);
+        try {
+            System.out.println("Looking for user information...");
+            return dbInstance.findUser(userName);
+        } catch (Exception e) {
+            System.out.println("User could not found!");
+            return null;
+        }
+
     }
 
     public final boolean verifyPassword(String userPass, String enteredPass) {
@@ -17,16 +23,26 @@ abstract class AuthenticatorMechanism {
 
     public final int authenticateByGivenAccess(String name, String password) {
         int rc = 1; //login failed
-        User registeredUser = findUser(name);
-        boolean isPasswordMatch = verifyPassword(registeredUser.getPassword(), password);
-        if (!isPasswordMatch) {
-            System.out.println("Passwords does not match");
+        try {
+            User registeredUser = findUser(name);
+            boolean isPasswordMatch = verifyPassword(registeredUser.getPassword(), password);
+            try {
+                if (!isPasswordMatch) {
+                    throw new Exception();
 
-        } else {
-            rc = isLoggedIn();
+                } else {
+                    rc = isLoggedIn();
+                }
+                return rc;
+            } catch (Exception e) {
+                System.out.println("Passwords did not match!");
+                return rc;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Something went wrong during login process");
+            return rc;
         }
-
-        return rc;
     }
 
 }

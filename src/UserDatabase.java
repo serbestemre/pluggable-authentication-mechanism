@@ -4,12 +4,16 @@ public class UserDatabase {
     static AbstractAggregate users = new Collection();
 
     public void addUserToDatabase(User newUser) {
-        if (!users.contains(newUser)) {
-            users.add(newUser);
-        }else{
-            System.out.println("USER COULDNT ADD");
-            // TODO Throw error User already defined with that id or username
+        try {
+            if (!users.contains(newUser)) {
+                users.add(newUser);
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            System.out.println("User already exists in the database");
         }
+
     }
 
     public void printDb() {
