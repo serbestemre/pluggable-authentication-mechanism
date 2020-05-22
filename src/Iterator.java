@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+
+
 interface AbstractIterator {
     void First();
 

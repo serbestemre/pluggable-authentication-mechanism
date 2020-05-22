@@ -1,6 +1,17 @@
 import java.util.Scanner;
 
-//Facade
+/*
+* OperatingSystem class is used to implement Facade Design pattern
+* User(Client) will be able to authenticate only calling authenticate() method from this class
+* All complexity of the authentication flow is hided by facade design pattern
+*
+Facade:
+    -OperatingSystem
+Subsystem Classes:
+    -LocalAPIPluggableAuthentication
+    -LdapAPIPluggableAuthentication
+    -KerberosAPIPluggableAuthentication
+* */
 class OperatingSystem {
     UserDatabase db = new UserDatabase();
 
@@ -49,19 +60,36 @@ class OperatingSystem {
                 break;
         }
 
-       try{
-           if (rc == 0) {
-               System.out.println("User logged in successfully!");
-           } else {
-               throw new Exception("Authentication is failed");
-           }
-       }catch (Exception e){
-           System.out.println(e.getMessage());
-       }
+        try {
+            if (rc == 0) {
+                System.out.println("User logged in successfully!");
+            } else {
+                throw new Exception("Authentication is failed");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 
 }
+
+
+/* USAGE
+* User have to be created by hard coding before run the application (examples are below)
+*
+* UID must start with API identifier codes
+* LocalAPI Identifier = 100
+* LdapAPI Identifier = 200
+* KerberosAPı Identifier = 300
+*
+* Created user has to be added to the operating system database by calling addUserToDatabase();
+*
+* After the program run username and password will be asked respectively
+*
+* authentication flow will be proceed by the operating system sequentially and the result will be printed
+*
+* */
 
 public class Main {
 

@@ -1,5 +1,10 @@
 import java.util.Objects;
-
+/*
+*  To simulate operating system users and its database we create these User and UserDatabase classes.
+*  We created a Collection from AbstractAggregate class to collect all registered users to the Operating system.
+*  We perform find and print database actions in this class
+*
+*  */
 public class UserDatabase {
     static AbstractAggregate users = new Collection();
 
