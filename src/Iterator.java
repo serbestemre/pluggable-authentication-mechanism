@@ -15,6 +15,8 @@ interface AbstractAggregate {
 
     void add(User us);
 
+    boolean contains(User user);
+
     int getCount();
 
     User get(int idx);
@@ -63,6 +65,14 @@ class Collection implements AbstractAggregate {
 
     public User get(int index) {
         return _items.get(index);
+    }
+
+    public boolean contains(User user) {
+        if (_items.contains(user))
+            return true;
+        else
+            return false;
+
     }
 
 }

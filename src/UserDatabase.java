@@ -1,9 +1,15 @@
+import java.util.Objects;
+
 public class UserDatabase {
     static AbstractAggregate users = new Collection();
 
     public void addUserToDatabase(User newUser) {
-        // TODO username should be unique and a user can only be defined with a single auth access permission
-        users.add(newUser);
+        if (!users.contains(newUser)) {
+            users.add(newUser);
+        }else{
+            System.out.println("USER COULDNT ADD");
+            // TODO Throw error User already defined with that id or username
+        }
     }
 
     public void printDb() {
@@ -83,6 +89,20 @@ class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return getUid() == user.getUid() ||
+                getUserName().toLowerCase().equals(user.getUserName().toLowerCase());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUserName(), getUid());
     }
 }
 
