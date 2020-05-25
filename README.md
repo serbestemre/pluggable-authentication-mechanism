@@ -1,6 +1,6 @@
 # Pluggable Authentication Mechanism
 
-This repository is created for Software Architure Design course project. The goal of this project is to simulate a simple authentication mechanism to the newly written Operating System. In a pluggable authentication mechanism different authentication mechanism can be used. Every user has a username, user id and a password. The operating system provides the following API's to the user applications for performing login to the system:
+This repository is created for Software Architecture Design course project. The goal of this project is to simulate a simple authentication mechanism to the newly written Operating System. In a pluggable authentication mechanism different authentication mechanism can be used. Every user has a username, user id and a password. The operating system provides the following API's to the user applications for performing login to the system:
 
 # Design Documents
 
